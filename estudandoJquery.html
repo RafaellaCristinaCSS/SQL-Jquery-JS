@@ -1,0 +1,630 @@
+<!doctype html>
+
+<html>
+<style>
+
+</style>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Projeto CSS3</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
+        integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+</head>
+
+<body style="background-color:#0c0c0c; color:#dddddd" class="body">
+
+
+    <h1>Elementos</h1>
+    <div class="testando_attr" style="background-color: black; border: solid 3px blue;">Div 1</div>
+    <div>Div 2</div>
+
+    <ul>
+        <li>Meu 1 - Item 1</li>
+        <li>Meu 1 - Item 2</li>
+        <li>Meu 1 - Item 3</li>
+    </ul>
+
+
+    <ul>
+        <li>Meu 2 - Item 1</li>
+        <li>Meu 2 - Item 2</li>
+        <li>Meu 2 - Item 3</li>
+    </ul>
+
+    <input type="text" placeholder="campo 1">
+
+    <select id="select">
+        <option class="">
+            <h1>Selecionando uma Opcao</h1>
+        </option>
+        <option class="opcao_1">opcao_1</option>
+        <option class="opcao_2">opcao_2</option>
+    </select>
+
+    <br>
+    <img style="width: 20px;" src="img/carro.jpg" alt="carro">
+    <script>
+        $(document).ready(() => {
+            /* Attr */
+            console.log($('img').attr('src')); /* retorna o atributo selecionado */
+            $('img').attr('src', 'img/carro.webp')/* Pemos passar um segundo argumento por parametro, sendo separado por virgulas, e assim modificar o atributo */
+            console.log($('.testando_attr').attr('style')); /* Pegando um Atribto de uma classe */
+            $('.testando_attr').attr('style', 'background-color: white; border: solid 15px yellow;')/* Alterando atributo style */
+
+            /*  Alterando o conteudo de uma teg atravez da funcao HTML() */
+            $('.opcao_1').html('eu sou o valor novo');
+            console.log($('.opcao_1').html());
+        })
+    </script>
+
+    <!-- Aula 484 - Inicio -->
+    <p>Aula 484</p>
+    <p>Nome</p>
+    <input type="text" placeholder="Insira o seu nome" id="nome">
+    <br>
+
+    <p>Onde voce nos Encontrou?</p>
+    <select id="origem">
+        <option style="color: #000;" value="1">Gogle</option>
+        <option style="color: #000;" value="2">Facebook</option>
+        <option style="color: #000;" value="3">whatsapp</option>
+        <option style="color: #000;" value="4">Gmail</option>
+    </select>
+
+    <!-- Testado pelo Console - Alterar apos aprender a capturar os dados enviados pelo usuario -->
+    <script>
+        $(document).ready(() => {
+            $('#nome').val(); /* Captura os dados enviados pelo usuario na caixa de texto */
+            $('#origem').val(); /* Captura os dados enviados pelo usuario na selecao das opcoes */
+            $('#origem').val('2'); /* alterando o valor selecionado pelo usuario */
+        })
+    </script>
+
+    <!-- Aula 484 - Fim -->
+
+    <!-- Aula 485 - Inicio -->
+    <p>Aula 485</p>
+    <p>Sexo</p>
+    <input type="radio" class="sexo" value="f">faminino <br>
+    <input type="radio" class="sexo" value="m">masculino <br>
+    <br>
+    <input type="checkbox" name="interesse" class="interesse" value="php">php<br>
+    <input type="checkbox" name="interesse" class="interesse" value="google">google<br>
+    <input type="checkbox" name="interesse" class="interesse" value="whatsapp">whatsapp<br>
+    <input type="checkbox" name="interesse" class="interesse" value="Facebook">Facebook <br>
+
+    <!-- Testado pelo Console - Alterar apos aprender a capturar os dados enviados pelo usuario -->
+    <script>
+        $(document).ready(() => {
+            /* Encontrar o valor do inpult checado */
+
+            $('.sexo:checked').val();
+            $('.interesse:checked').val();
+
+            // O 'val()' retorna apenas o primeiro elemento, entao mesmo que tenha mais de um elemento checado
+            // ele conseguira pegar apenas o primeiro deles
+            // Para capturar mais de um elemento podemos ultilizar o '$.each()' 
+
+            /* $.each(arry, callback) /* O primeiro argumento seria o aray que necessita ser inspencionado
+                                         O segundo seria uma funcao que exige dois parametros */
+
+            $.each($('.interesse:checked'), (indice, valor) => {
+                console.log(indice, valor.value) /* Indice seria a ordem dos elementos do array
+                                              Valor seria o conteudo presente naquele indice
+                                              O '.value' foi utilizado para capturar o valor do inpult, mas nao é exigido para o funcionamento da funcao jquery */
+            })
+
+        })
+    </script>
+    <!-- Aula 485 - Fim -->
+    <!-- Aula 486 - Inicio -->
+    <p>Aula 486</p>
+    <ul id="lista1">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <div id="lista2">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+    </div>
+    <div id="lista3">
+        <div>Elemento que sera substituido</div>
+    </div>
+    <div id="lista4">
+        <div>Elemento que sera Deletado</div>
+    </div>
+    <hr>
+    <script>
+        $(document).ready(() => {
+            /* Para criar um elemento interno entre duas tegs (uma de abertura e a outra de fechamento (uma div por exemplo))
+                na primeira teg iremos adicionar uma classe ou um id, para que possa ser selecionado.
+                Depois usaremos uma funcao Jquery para criar o elemento html.
+            */
+            $('#lista1').prepend('<li>Item 0</li>');  /* Utilizamos o (.prepend()) para criar o primeiro elemento daquela teg seleciona */
+            $('#lista1').append('<li>Item 4</li>');  /* Utilizamos o (.append()) para criar o ultimo elemento daquela teg seleciona */
+
+            $('#lista2').before('<p>Item Novo Superior </p>'); /*  Utilizamos o (.before()) para criar um elemento acima daquela teg seleciona */
+            $('#lista2').after('<p>Item Novo Inferior </p>'); /*  Utilizamos o (.after()) para criar um elemento abaixo daquela teg seleciona */
+
+            $('#lista3').html('<p>Eu substitui o elemento anterior</p>'); /*  Utilizamos o (.html()) para substituir o elemento interno daquela teg seleciona */
+            $('#lista4').remove(); /*  Utilizamos o (.remove()) para deletar o elemento interno daquela teg seleciona */
+        }) 
+    </script>
+    <!-- Aula 486 - Fim -->
+
+    <!-- Aula 487 - Inicio -->
+    <p>Aula 487</p>
+    <div id="topo">
+        <ul class="menu">
+            <li class="item"></li>
+            <li class="item"></li>
+        </ul>
+    </div>
+    <div id="pagina">
+        <div class="secao1">
+            <div class="subSecao"></div>
+        </div>
+        <div class="secao2">
+            <h1></h1>
+        </div>
+    </div>
+    <div id="rodape">
+        <div>
+            <p></p>
+            <span id="opcao1"></span>
+<script>
+  $(document).ready(function() {
+    $('.incone-modulo-index').click((e) => {
+      let teste = $(e.target).prop('checked');
+      let new_teste = (teste == true) ? "false" : "true";
+      console.log(new_teste);
+    });
+    // $('.button-teste').click((e) => {
+
+    //  let teste = $(e).find($('.teste1'));
+    //   $(teste).addClass('outraClass');
+    //   // let especifico = $(e.target);
+
+    //   // // $('.incone-modulo-index').attr('checked', false);
+    //   // console.log(especifico.prop('checked',true))
+
+    // });
+    /*  $('.incone-modulo-index').prop('checked',false); */
+  });
+</script>
+
+<div class="container body-pagina-index">
+  <div class="header-index">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-lg-12  estrutura-cabecalho-index">
+          <h1 class="text-center"><span><?= $projeto->cadprj_tituloprojeto ?></span></h1>
+          <h3 class="text-center"><span><?= $projeto->cadprj_equipesenvolvidas ?></span></h3>
+        </div><!-- /.col -->
+
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+
+    <!-- Main content -->
+    <div class="container-fluid">
+      <div class="row offset-lg-2 informacao-curso-index">
+        <div class="col-6 col-lg-4 col-md-4 col-sm-6 col-xs-6 text-lg-left text-md-left text-sm-left  text-center texto-informacao-curso-index">
+          <p>Início em : <span> <?= format_date_br($projeto->cadprj_datadeinicio_execucaotrabalhos) ?> </span>
+          </p>
+
+          <p>Conclusão em : <span> <?= format_date_br($projeto->cadprj_datadetermino_execucaotrabalhos) ?>
+            </span></p>
+          <div class="offset-0 progress-bar" role="progressbar" style="width: 80%;  background-color: #E9ECEF" aria-valuemin="0" aria-valuemax="100">
+            <div class="progresso" id="progresso-dias-index"><?= render_progress_bar(50) ?></div>
+          </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(() => {
+            console.log($('.secao1').parent()); /*  Utilizamos o (.parent()) para chamar o pai do elemento selecionado */
+            console.log($('.subSecao').closest('#pagina')); /*  Utilizamos o (.closest()) para chamar um dos pais do elemento selecionado (passando como parametro uma reerencia para aquele 'antepassado') */
+            console.log($('.secao2').find('h1')); /*  Utilizamos o (.find()) para chamar um dos filhos do elemento selecionado (passando como parametro uma reerencia para aquele 'descendente') */
+        }) 
+    </script>
+    <!-- Aula 487 - Fim -->
+
+    <!-- Aula 488 - Inicio -->
+    <p>Aula 488</p>
+    <div id="topo_488">
+        <h1>Barra de Navegação da Aplicacao</h1>
+    </div>
+    <div>
+
+        <div>
+            <h3>Contatos</h3>
+            <hr>
+
+            <p>Nome:</p>
+            <input type="text">
+            <br>
+
+            <p>Mensagem:</p>
+            <textarea name="" id=""></textarea>
+            <br>
+
+            <button type="button"></button>
+        <div class="col-6 col-lg-8 col-md-8 col-sm-6 col-xs-6 texto-informacao-curso-index">
+          <div class="row">
+            <div style="margin-bottom: 10px" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-lg-left text-md-left text-center ">
+              <p style="margin-bottom: 2px;">Progresso Geral</p><span>
+                <div class="offset-lg-0 offset-md-0 offset-sm-1 offset-xs-3 progress " style="width: 80%; height:21px; background-color: #dcdcdc; box-shadow:0px 0px 2px #ddd">
+                  <?= render_progress_bar(90) ?>
+                  <!-- $projeto->cadprj_percentual_execucao -->
+                </div>
+              </span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-lg-left text-md-left text-center">
+
+              <p style="margin-bottom: 0px;">Pontuação</p><span>
+                <div class="offset-lg-0 offset-md-0 offset-sm-1 offset-xs-3 progress " style="width: 80%; height:21px; background-color: #dcdcdc">
+                  <?= render_progress_bar(50) ?>
+                </div>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>
+        .campo {
+            color: #0000ff;
+            padding: 10px;
+        }
+    </style>
+    <script>
+        $(document).ready(() => {
+            $('#topo_488').css({ 'background-color': '#155661', 'color': '#fff' }); /* Alterando o css com o jquery */
+            $('p').addClass('campo'); /* Adiciona uma classe ao elemento selecionado */
+            console.log($('p').hasClass('campo')); /* Verifica se a class existe ou nao no elemento selecionado e retorna um bollean*/
+            if ($('p').hasClass('campo')) {
+                $('p').removeClass('campo'); /* a funcao (.removeClass()), serve para retirar a class */
+            }
+        }) 
+    </script>
+    <!-- Aula 488 - Fim -->
+  </div>
+  <!-- Modulo - Inicio -->
+
+    <!-- Aula 490 - Inicio -->
+    <p>Aula 490</p>
+    <div id="topo_490">
+        <h1>eventos</h1>
+  <div class="row">
+    <div class="col-8">
+      <?= get_flash_message('area_aluno_index') ?>
+    </div>
+    <div>
+        <h3>Browser</h3>
+        <span>Onload:</span> <span id="onload"></span><br>
+        <span>Scroll:</span> <span id="scroll"></span><br>
+        <span>window:</span> <span id="window"></span><br>
+        <div style="height:100px; width:100px;border: solid 3px #000; overflow-y:scroll">
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  </div>//overflow-y: scroll - serve para adicionar uma barra de rolagem na vertical (é necessario ter conteudo)
+          <div style="height:100px; width: 1200px;border: solid 3px #a2a2a2 ;overflow-x: scroll; white-space: nowrap;">
+   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis numquam, eius earum eveniet unde quisquam repudiandae doloremque nisi qui sunt ratione ipsam animi amet assumenda fugit quibusdam doloribus quasi commodi.
+   Eligendi quidem odit numquam est, ut cumque totam voluptatum et nam aperiam esse inventore soluta suscipit, dolore fugiat vel. Ab voluptatum sit adipisci repudiandae incidunt quas natus asperiores et eum.
+   Fugiat, possimus ducimus alias repellat vel laboriosam magnam enim, doloremque cum officia distinctio accusamus eaque quas animi aliquam saepe veniam voluptatum ipsum sequi. Molestiae dolores, neque praesentium nisi ipsam beatae!
+
+</div> //overflow-x: scroll - serve para adicionar uma barra de rolagem na horizontal (é necessario ter conteudo)
+
+
+
+  <div id="accordion_modulos">
+    <?php foreach ($items_grade as $key_item_modulo => $item) { ?>
+      <div id="modulo_<?= $key_item_modulo ?>">
+        <div class="card">
+          <div class="card-header-index" id="heading_modulo_<?= $key_item_modulo ?>">
+            <div class="row itens-card-header-index">
+
+              <div class="col-3 ">Módulo <?= $item['modulo_id'] ?></div>
+              <div class="col-2"> Progresso do Modulo </div>
+              <div class="col-2"><?= render_progress_bar_modulo(50) ?> </div>
+              <input class="incone-modulo-index" id="icone_modulo_<?= $key_item_modulo ?>" type="checkbox">
+              <label class="col-4 label-modulo-index" for="icone_modulo_<?= $key_item_modulo ?>">
+                <?php if (90 == 100) { ?>
+                  <span class="span-index" data-toggle="collapse" data-target="#collapse_modulo_<?= $key_item_modulo ?>" aria-expanded="true" aria-controls="collapse_modulo_<?= $key_item_modulo ?>"> Concluido <i class="bi bi-check-lg "></i> </span>
+                <?php } else { ?>
+                  <span class="span-index" data-toggle="collapse" data-target="#collapse_modulo_<?= $key_item_modulo ?>" aria-expanded="true" aria-controls="collapse_modulo_<?= $key_item_modulo ?>"> Abrir Modulo <i class="bi bi-plus-lg btn btn-link"></i> </span>
+                <?php  } ?>
+
+                <span class="span-index" data-toggle="collapse" data-target="#collapse_modulo_<?= $key_item_modulo ?>" aria-expanded="true" aria-controls="collapse_modulo_<?= $key_item_modulo ?>">Fechar Modulo<i class='bi bi-x-lg btn btn-link '></i></span>
+              </label>
+              <!--       <button class="button-teste"><i class="teste1">teste</i></button> -->
+            </div>
+
+          </div>
+
+          <div class="collapse container" id="collapse_modulo_<?= $key_item_modulo ?>" data-parent="#accordion_modulos">
+            <div id="accordion_<?= $key_item_modulo ?>">
+              <div class="row listagem-etapas-index">
+                <div class="col-12 ">
+                  <?php foreach ($item['etapas'] as $key_etapa_1 => $etapa_1) { ?>
+                    <button class="btn" id="etapa-index" type="button" data-toggle="collapse" data-target="#collapse_<?= $key_etapa_1 ?>_modulo_<?= $key_item_modulo ?>" aria-expanded="false" aria-controls="collapse_<?= $key_etapa_1 ?>_modulo_<?= $key_item_modulo ?>">
+                      Etapa <?= $etapa_1['etapa_id'] ?>
+                    </button>
+                  <?php } ?>
+                </div>
+              </div>
+              <?php foreach ($item['etapas'] as $key_etapa_2 => $etapa_2) { ?>
+
+                <div class="collapse <?= ($key_etapa_2 == 0) ? 'show' : ''; ?> row corpo-etapa-index" id="collapse_<?= $key_etapa_2 ?>_modulo_<?= $key_item_modulo ?>" data-parent="#accordion_<?= $key_item_modulo ?>">
+                  <div class="col-12 card card-body-index">
+                    <!-- teste - Inicio -->
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Etapa <?= $etapa_2['etapa_id'] ?> </th>
+                          <th>Fórum</th>
+                          <th>Nota</th>
+                          <th>Status</th>
+                          <th>Data limite</th>
+                        </tr>
+                      </thead>
+                      <tbody id="corpo-etapa-tabela-index">
+                        <?php foreach ($etapa_2['items'] as $key_item => $conteudo_itens) { ?>
+
+                          <tr>
+                            <td>
+                              <?= build_link_item_grade($conteudo_itens['link'], $conteudo_itens['item_id'], $conteudo_itens['titulo'], $conteudo_itens['tipo']) ?>
+                            </td>
+                            <td></td>
+                            <td>
+                              <?= render_status_atividade_aluno($conteudo_itens) ?>
+                              <!-- <?php if ($conteudo_itens['nota'] >= 0) { ?>
+                                            <?= "{$conteudo_itens['nota']}/{$conteudo_itens['nota_total']}" ?>
+                                                <?php } else { ?>
+                                                Aguardando Correção
+                                                <?php } ?> -->
+                            </td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                        <?php } ?>
+                      </tbody>
+                    </table>
+                    <!-- teste - Fim -->
+                  </div>
+                </div>
+              <?php } ?>
+            </div>
+          </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(() => {
+            $('#onload').html('Pagina Carregada');
+            $(window).scroll(() => {
+                $('#scroll').html('Scroll Acionado'); /* O evento (.scroll()) captura a rolagem do mouse */
+            })
+            $(window).resize(() => {
+                $('#window').html('Pagina redimensionada').css('background-color', 'red'); /* O evento (.resize()) captura o redimensionamento da Pagina */
+            })
+        })
+    </script>
+    <!-- Aula 490 - Fim -->
+
+
+    <!-- Aula 491  - 492  - Inicio -->
+    <p>Aula 491 - 492 </p>
+    <button id="btn1" type="button">Clique Aqui</button>
+    <div id="div1" style="background-color: green; height: 30px; width: 50px; margin: 10px;"></div>
+
+    <button id="btn2" type="button">Clique Aqui</button>
+    <div id="div2" style="background-color: green; height: 30px; width: 50px; margin: 10px;"></div>
+
+    <button id="btn3" type="button">Clique Aqui 2X</button>
+    <div id="div3" style="background-color: green; height: 30px; width: 50px; margin: 10px;"></div>
+
+    <div id="div4" style="border: solid 3px #000000 ; height: 50px; width: 200px; margin: 10px;"></div>
+
+    <div style="background-color: #00aaff; width: 80px; height: 80px; padding: 70px;" id="divExterna">
+        <div style="background-color: #0000ff; width: 80px; height: 80px;" id="divInterna"></div>
+    </div>
+
+    <span>Div Externa</span> <span id="resultadoDivExterna"></span>
+    <br>
+    <span>Div Interna</span> <span id="resultadoDivInterna"></span>
+    <hr>
+
+    <div style="background-color: #00aaff; width: 80px; height: 80px; padding: 70px;" id="divExterna2">
+        <div style="background-color: #0000ff; width: 80px; height: 80px;" id="divInterna2"></div>
+    </div>
+
+    <span>Div Externa2</span> <span id="resultadoDivExterna2"></span>
+    <br>
+    <span>Div Interna2</span> <span id="resultadoDivInterna2"></span>
+    <hr>
+
+    <script>
+        $(document).ready(() => {
+            $('#btn1').mousedown(() => { /* O evento (.mousedown()) captura quando o usuario apertar o botao, antes mesmo de tirar */
+                $('#div1').css('background-color', 'blue');
+            })
+            $('#btn1').mouseup(() => { /* O evento (.mouseup()) captura quando o usuario termina de apertar o botao, ou seja, quando ele solta o botao */
+                $('#div1').css('background-color', 'pink');
+            })
+            $('#btn2').click(() => { /* O evento (.click()) captura quando o usuario termina de apertar o botao, ou seja, quando ele clicar realmente no botao */
+                $('#div2').css('background-color', 'pink');
+            })
+            $('#btn3').dblclick(() => { /* O evento (.dblclick()) captura quando o usuario clicar duas vezes seguidas no botao */
+                $('#div3').css('background-color', '#ffff00');
+            })
+            $('#div4').mousemove((e) => { /* Captura o passagem do mouse sobre o elemento referenciado */
+                /* OBS: Quando adicionamos um parametro para a funcao seta, é para capturarmos o evento que desparado quando se inicia a funcao */
+                console.log(e.offsetX, e.offsetY);  /*  .offsetX/Y retorna a posicao do mouse considerando o plano catersiano */
+            });
+
+            /* Eventos Antigos que consideram a hierarquia do html */
+
+            $('#divExterna').mouseover(() => { /* O evento mouseover() captura quando o usuario passsa com o mause por cima do elemento referenciado */
+                console.log('Evento Antigo');
+                $('#resultadoDivExterna').html('ENTROU');
+                console.log('entrou')
+            })
+            $('#divInterna').mouseover(() => { /* O evento mouseover() captura quando o usuario passsa com o mause por cima do elemento referenciado */
+                $('#resultadoDivInterna').html('ENTROU');
+                console.log('entrou')
+            })
+
+            $('#divExterna').mouseout(() => { /* O evento mouseout() captura quando o usuario sai com o mause por cima do elemento referenciado */
+                $('#resultadoDivExterna').html('SAIU');
+                console.log('saiu')
+            })
+
+            $('#divInterna').mouseout(() => { /* O evento mouseout() captura quando o usuario sai com o mause por cima do elemento referenciado */
+                $('#resultadoDivInterna').html('SAIU');
+                console.log('saiu')
+            })
+
+            /* Eventos Novos que nao consideram a hierarquia do html */
+
+            $('#divExterna2').mouseenter(() => { /* O evento mouseenter() captura quando o usuario passsa com o mause por cima do elemento referenciado */
+                console.log('Evento Novo');
+                $('#resultadoDivExterna2').html('ENTROU');
+                console.log('entrou')
+            })
+            $('#divInterna2').mouseenter(() => { /* O evento mouseenter() captura quando o usuario passsa com o mause por cima do elemento referenciado */
+                $('#resultadoDivInterna2').html('ENTROU');
+                console.log('entrou')
+            })
+
+            $('#divExterna2').mouseleave(() => { /* O evento mouseleave() captura quando o usuario sai com o mause por cima do elemento referenciado */
+                $('#resultadoDivExterna2').html('SAIU');
+                console.log('saiu')
+            })
+
+            $('#divInterna2').mouseleave(() => { /* O evento mouseleave() captura quando o usuario sai com o mause por cima do elemento referenciado */
+                $('#resultadoDivInterna2').html('SAIU');
+                console.log('saiu')
+            })
+
+        }) 
+    </script>
+    <!-- Aula 491  - 492  - Fim -->
+
+    <!-- Aula 493 - Inicio -->
+    <p>Aula 493 </p>
+
+    <h3>Teclado</h3>
+    <span>Nome</span>
+    <input type="text" id="teclado">
+    <span id="resultado-tecla"></span>
+    <p id="resultado-campo-verificado"></p>
+    <hr>
+    <script>
+        $(document).ready(() => {
+            $('#teclado').keydown((e) => { /* O evento keydown() captura quando o usuario preciona uma tecla, antes mesmo de solta-la*/
+                $('#resultado-tecla').html('tecla precionada');
+
+            });
+            $('#teclado').keyup((e) => { /* O evento keyup() captura quando o usuario solta uma tecla*/
+                $('#resultado-tecla').html('tecla liberada');
+            });
+
+            $('#teclado').keyup((e) => {
+                /* Podemos atribuir eventos apos determinado caractere ser selecionado */
+                console.log(e.keyCode); /* Com o keyCode podemos capturar o codigo da tecla */
+                if (e.keyCode == 32) { /* Ou seja, se a tecla espaço (que é a tecla que possui o codigo 32) for selecionada */
+                    let txt = $(e.target).val();
+                    $('#resultado-tecla').html(txt); /* adicionando o valor escrito ao campo referenciado */
+                    $(e.target).val(''); /* para apagar o que havia sido escrito */
+                }
+            });
+
+            /* Determinado os caracteres que podem ser escritos no campo */
+            $('#teclado').keyup((e) => {
+                let textoCampo;
+                if (e.keyCode < 49 || e.keyCode > 52 && e.keyCode < 97 || e.keyCode > 100) { /* Ou seja, se a tecla nao for 1234 (tanto os numeros acima do teclado, quanto aqueles numeros que sao liberados pelo NumLock)  */
+                    textoCampo = $(e.target).val();
+                    textoCampo = textoCampo.slice(0, -1); /* No comando slice, o primeiro argumento serve para dizer a posicao nao sera considerada, ou seja, em um array de 3 posicoes, um .slice(2) retirara os dois primeiros elementos (começa a contar as posicões a partir do 1),
+                                                             e o segundo argumento, o que sera considerado
+                                                             Se o primeiro argumento for negativo, ele retirara considerando o final da lista como sendo o inicial, por exemploo, um array com tres caracteres, .slice(-1) pegara o ultimo elemento.
+                                                             Se o segundo argumento for negativo, ele retirara considerando o final da lista como sendo o inicial, por exemplo, um array com tres caracteres, .slice(0,-1) terirara o ultimo elemento.*/
+                    $(e.target).val(textoCampo);
+                }
+                if (e.keyCode == 32 || e.keyCode == 13) {
+                    $('#resultado-campo-verificado').html(textoCampo);
+                    $(e.target).val('');
+                    /* Verificar o porque quando a tecla enter é precionada, o ultimo elemento é deletado */
+                }
+            })
+        });
+
+    </script>
+    <!-- Aula 493 - Fim -->
+
+    <!-- Aula 494 - Inicio -->
+    <p>Aula 494 </p>
+
+    <h3>Formulario</h3>
+    <form id="form-aula-494">
+        <span>Nome:</span>
+        <input type="text" id="nome-aula-494">
+
+        <span>E-mail:</span>
+        <input type="text" id="email-aula-494">
+
+        <span>Motivo do Contato:</span>
+        <select id="opcao-select">
+            <option value=""> -- Selecione -- </option>
+            <option value="duvida">Duvida:</option>
+            <option value="sugestao">Sugestao:</option>
+        </select>
+
+        <button type="submit">Enviar</button>
+    </form>
+    <script>
+        $(document).ready(() => {
+            $('#nome-aula-494').focus((e) => { /* O evento .focus() é acinado quando o usuario seleciona o campo do inpult referenciado */
+                console.log('Esse elemento foi clicado (nome)');
+                $(e.target).addClass('inpult-focado');
+            })
+            $('#email-aula-494').focus((e) => {
+                console.log('Esse elemento foi clicado (email)');
+                $(e.target).addClass('inpult-focado');
+            })
+            $('#nome-aula-494').blur((e) => { /* O evento .blur() é acinado para retirar o .focus do inpult referenciado */
+                console.log('Esse elemento perdeu o foco (email)');
+                $(e.target).removeClass('inpult-focado');
+            });
+            $('#email-aula-494').blur((e) => { 
+                console.log('Esse elemento perdeu o foco (email)');
+                $(e.target).removeClass('inpult-focado');
+            });
+            $('#opcao-select').change((e)=>{
+                console.log($(e.target).val());
+            });
+            $('#form-aula-494').submit((e)=>{ /* O evento .submit() captura o envio do formulario */
+                e.preventDefault(); /* O .preventDefault() retira o evento padrao do comando (nesse caso seria a refresh da pagina)) */
+                console.log('formulario enviado');
+            });
+        });
+
+    </script>
+    <style>
+        .inpult-focado {
+            border: solid 3px #ff0000;
+        }
+    </style>
+    <!-- Aula 494 - Fim -->
+</body>
+      </div>
+    <?php } ?>
+  </div>
+</div>
+
+
+<!-- /.content-wrapper -->
+
+</html> 
+<!-- Modulo - Fim -->
